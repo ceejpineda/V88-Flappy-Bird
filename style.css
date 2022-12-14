@@ -93,10 +93,10 @@ body{
     background-position: center;
     position: absolute;
     top: 500px;
-    left: 450px;
+    left: 650px;
     z-index: 9;
 }
-#block{
+.block{
     width: 75px;
     height: 700px;
     background-color: black;
@@ -105,9 +105,11 @@ body{
     position: relative;
     left: 600px;
     animation: block-moving 2s infinite linear;
+    animation-play-state: running;
+
     z-index: 1;
 }
-#hole{
+.hole{
     width: 75px;
     height: 250px;
     position: relative;
@@ -115,6 +117,7 @@ body{
     left: 700px;    
     top: -700px;
     animation: block-moving 2s infinite linear;
+    animation-play-state: running;
     z-index: 5;
 }
 #cover1{
@@ -135,11 +138,11 @@ body{
     top: 150px;
     left: -20px;  
 }
-@keyframes block-moving {
-    0%{left: 600px}
-    100%{left: -50px}
-}
 .paused{
     animation-play-state: paused;
     -webkit-animation-play-state: paused;
+}
+@keyframes block-moving {
+    0%{left: 600px}
+    100%{left: -50px}
 }

@@ -2,8 +2,8 @@ const flappyBird = (()=>{
 
     //Global Game Elements
     const game = document.getElementById('game');
-    const block = document.getElementById('block');
-    const hole = document.getElementById('hole');
+    const block = document.querySelector('.block');
+    const hole = document.querySelector('.hole');
     const bird = document.getElementById('bird');
     let isJumping = false;
     let isStart = false;
@@ -14,30 +14,41 @@ const flappyBird = (()=>{
     const playAgain = document.getElementById('playAgain');
     const scoreContainer = document.getElementById('score');
     const menu = document.querySelector('.mainMenu');
-    const gameOver = document.querySelector('.gameOver');
+    const gameOverDiv = document.querySelector('.gameOver');
 
 
     
     const mainMenu = () =>{
-        gameOver.style.display = 'none';
+        gameOverDiv.style.display = 'none';
         block.style.display = 'none';
         hole.style.display = 'none';
     }
 
+    const gameOver = () =>{
+        gameOverDiv.style.display = 'flex';
+        block.style.display = 'none';
+        hole.style.display = 'none';
+        game.style.display = 'flex';
+    }
+
     const initialize = () =>{
         if(!isStart) return;
+        score = 0;
+        gameOverDiv.style.display = 'none';
         menu.style.display = 'none';
         game.style.display = 'block';
         block.style.display = 'block';
         hole.style.display = 'block';
         bird.style.display = 'block';
         bird.style.top = '500px';
-        bird.style.left = '450px';
-        hole.addEventListener('animationiteration', ()=>{
-            hole.style.top = -((Math.random()*300)+200) + 'px';
-            score++;
-            scoreContainer.innerHTML = score;
-        })
+        bird.style.left = '650px';
+        hole.addEventListener('animationiteration', holePosition);
+    }
+
+    const holePosition = () =>{
+        hole.style.top = -((Math.random()*300)+200) + 'px';
+        score++;
+        scoreContainer.innerHTML = score;
     }
 
     const gravity = () =>{
@@ -50,6 +61,7 @@ const flappyBird = (()=>{
             isStart = false;
             hole.classList.add('paused');
             block.classList.add('paused');
+            setTimeout(gameOver, 1500);
         }
         //bird.style.transform = 'rotate(-45deg)'
         bird.style.top = birdTop+7 +'px';
@@ -72,6 +84,13 @@ const flappyBird = (()=>{
             isStart = true;
             initialize();
         })
+        playAgain.addEventListener('click', ()=>{
+            isStart = true;
+            score = 0;
+            initialize();
+            hole.classList.remove('paused');
+            block.classList.remove('paused');
+        })
 
         window.addEventListener('keydown', (e)=>{
             if(e.repeat) return;
@@ -86,15 +105,19 @@ const flappyBird = (()=>{
         let blockPos = block.getBoundingClientRect();
         let holePos = hole.getBoundingClientRect();
         let birdPos = bird.getBoundingClientRect();
-        
-        let bottomBlock = blockPos.bottom;
 
         if(Math.abs(blockPos.left - birdPos.left)<10 && birdPos.top<holePos.top){
-            console.log('hit');
+            isStart = false;
+            hole.classList.add('paused');
+            block.classList.add('paused');
+            setTimeout(gameOver, 1500);
         } 
 
         if(Math.abs(blockPos.left - birdPos.left)<10 && birdPos.bottom>holePos.bottom){
-            console.log('hit');
+            isStart = false;
+            hole.classList.add('paused');
+            block.classList.add('paused');
+            setTimeout(gameOver, 1500);
         }
         
     }
