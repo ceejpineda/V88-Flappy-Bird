@@ -1,0 +1,145 @@
+@font-face {
+    font-family: FlappyBird;
+    src: url('./assets/FlappyBirdy.ttf');
+}
+*, *::before, *::after{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'FlappyBird';
+    background-color: #121212;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.mainMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.mainMenu > h1{
+    font-size: 100px;
+    text-shadow:3px 3px #121212;
+}
+.mainMenu > button{
+    font-family: 'FlappyBird';
+    align-self: center;
+    font-size: 30px;
+    padding: 10px;
+    background-color: transparent;
+    border: 3px solid black;
+}
+.mainMenu > button:hover{
+    color: black;
+    cursor: pointer;
+    background-color: white;
+}
+.gameOver{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.gameOver > h1{
+    font-size: 100px;
+    text-shadow:3px 3px #121212;
+}
+.gameOver > button{
+    font-family: 'FlappyBird';
+    align-self: center;
+    font-size: 30px;
+    padding: 10px;
+    background-color: transparent;
+    border: 3px solid black;
+}
+.gameOver > button:hover{
+    color: black;
+    cursor: pointer;
+    background-color: white;
+}
+.score{
+    font-size: 40px;
+}
+#game{
+    font-family: 'FlappyBird';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 700px;
+    border: 2px solid black;
+    margin: auto;
+    overflow: hidden;
+    background-color: skyblue;
+    background-size: cover;
+    z-index: 10;
+}
+#bird{
+    width: 50px;
+    height: 50px;
+    background-image: url('./assets/bird.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 500px;
+    left: 450px;
+    z-index: 9;
+}
+#block{
+    width: 75px;
+    height: 700px;
+    background-color: black;
+    background-image: url('./assets/tunnel.png');
+    background-size: contain;
+    position: relative;
+    left: 600px;
+    animation: block-moving 2s infinite linear;
+    z-index: 1;
+}
+#hole{
+    width: 75px;
+    height: 250px;
+    position: relative;
+    background-color: skyblue;
+    left: 700px;    
+    top: -700px;
+    animation: block-moving 2s infinite linear;
+    z-index: 5;
+}
+#cover1{
+    background-image: url('./assets/cover.png');
+    position: relative;
+    transform: scaleY(-1);
+    background-size: contain;
+    width: 115px;
+    height: 50px;
+    left: -20px;    
+}
+#cover2{
+    background-image: url('./assets/cover.png');
+    position: relative;
+    background-size: contain;
+    width: 115px;
+    height: 50px;
+    top: 150px;
+    left: -20px;  
+}
+@keyframes block-moving {
+    0%{left: 600px}
+    100%{left: -50px}
+}
+.paused{
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+}
